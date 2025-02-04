@@ -53,9 +53,9 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'vulnerable-site'
+          app-name: 'vulnerable-app'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4080FF02C6844229A0E0EB0ED16426F0 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CAAF6EEE19D94CCF8F02CE90E9F0B6E1 }}
           package: .
 
   scan-with-dastardly:
@@ -67,7 +67,7 @@ jobs:
       - name: Run Dastardly Scan
         uses: PortSwigger/dastardly-github-action@main
         with:
-          target-url: 'https://vulnerable-site.azurewebsites.net/'
+          target-url: 'https://vulnerable-app.azurewebsites.net/'
 
       - name: Publish Dastardly Scan Report
         if: always()
